@@ -1,0 +1,40 @@
+ip_list:
+  - 192.168.0.1
+  - 192.168.0.2
+
+mac_list:
+  - 1a
+  - 2a
+
+# this are the models to track
+gazebo_models:
+  - agent1
+  - agent2
+
+print_debug: false
+
+net_use_uds: true
+phy_use_uds: true
+
+do_driver_transfer: false
+
+netsim_uds_server_address: '/tmp/net_server_socket'
+
+netsim_ip_server_address: 'localhost'
+netsim_ip_server_port: 10000
+netsim_ip_ranging_port: 10005
+
+phy_uds_server_address: '/tmp/phy_server_socket'
+
+phy_ip_server_address: 'localhost'
+phy_ip_server_port: 10001
+
+phy_driver_uds_server_address: '/tmp/phy_driver_socket'
+net_driver_uds_server_address: '/tmp/net_driver_socket'
+
+responsiveness_timeout: 2
+
+packet_holding_duration: 50
+driver_sync_time: 0.01
+
+broadcast_address: '4294967295'  # 255.255.255.255 stored as string since yaml doesn't support long ints

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package channel_data_proto;
+
+message ChannelData {
+    repeated double node_list = 1;
+    repeated PathDetails path_details = 2;
+}
+
+message PathDetails {
+    repeated uint32 ids = 1;
+    bool los = 2;
+    repeated uint32 num_hops = 3;
+    repeated double hop_points = 4;
+}

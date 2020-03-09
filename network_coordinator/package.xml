@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>network_coordinator</name>
+  <version>0.0.0</version>
+  <description>The ROS-NetSim network coordinator package</description>
+
+  <maintainer email="cfullana@seas.upenn.edu">Miguel Calvo-Fullana</maintainer>
+  <maintainer email="mox@seas.upenn.edu">Daniel Mox</maintainer>
+  
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>protobuf_msgs</depend>
+
+</package>

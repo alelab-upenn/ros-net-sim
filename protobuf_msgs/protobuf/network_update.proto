@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package network_update_proto;
+
+message NetworkUpdate {
+    enum MsgType {
+        BEGIN = 0;
+        END = 1;
+    }
+
+    MsgType msg_type = 1;
+    uint32 time_val = 2;
+
+    repeated uint32 pkt_id = 3;
+    repeated fixed32 src_ip = 4;
+    repeated fixed32 dst_ip = 5;
+    repeated uint32 pkt_lengths = 6;
+    repeated fixed32 rx_ip = 7;
+
+    repeated double ber = 8;
+
+    bytes channel_data = 9;
+
+    repeated uint32 clear_pkt_id = 10;
+    repeated fixed32 clear_src_ip = 11;
+    repeated fixed32 clear_dst_ip = 12;
+
+}

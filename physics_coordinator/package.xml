@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>physics_coordinator</name>
+  <version>0.0.0</version>
+  <description>The ROS-NetSim physics coordinator package</description>
+
+  <maintainer email="cfullana@seas.upenn.edu">Miguel Calvo-Fullana</maintainer>
+  <maintainer email="mox@seas.upenn.edu">Daniel Mox</maintainer>
+  
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>channel_simulator</depend>
+  <depend>gazebo_ros</depend>
+  <depend>gazebo</depend>
+  <depend>roscpp</depend>
+  <depend>protobuf_msgs</depend>
+
+
+</package>

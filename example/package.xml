@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>example</name>
+  <version>0.0.0</version>
+  <description>Example and test scenarios for ROS-NetSim</description>
+
+  <maintainer email="cfullana@seas.upenn.edu">Miguel Calvo-Fullana</maintainer>
+  <maintainer email="mox@seas.upenn.edu">Daniel Mox</maintainer>
+  
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>network_coordinator</depend>
+  <depend>protobuf_msgs</depend>
+
+</package>
