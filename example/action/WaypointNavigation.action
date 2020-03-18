@@ -1,0 +1,6 @@
+Header header
+geometry_msgs/Pose[] waypoints
+---
+float32 total_time
+---
+float32 percent_complete

@@ -1,0 +1,65 @@
+<launch>
+
+  <arg name="model" default="burger"/>
+  <arg name="name"  default="tb3"/>
+  <arg name="debug" default="false"/>
+
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="yaw"   default="0.0"/>
+
+  <arg name="world_frame" default="world"/>
+  <arg name="odom_frame"  default="$(arg name)/odom"/>
+  <arg name="base_frame"  default="$(arg name)/base_link"/>
+
+  <arg name="position_tol"    default="0.3"/>   <!-- meters -->
+  <arg name="heading_tol"     default="0.5"/>   <!-- ~28deg -->
+  <arg name="linear_vel_des"  default="1.0"/>   <!-- m/s -->
+  <arg name="linear_vel_inc"  default="0.005"/>
+  <arg name="angular_vel_des" default="0.3"/>   <!-- rad/s -->
+  <arg name="angular_vel_inc" default="0.01"/>
+
+  <group ns="$(arg name)">
+
+    <!-- load robot description from file -->
+    <param name="robot_description"
+           command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+    <!-- publish robot link states -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="30.0" />
+      <param name="tf_prefix" value="$(arg name)" />
+    </node>
+    
+    <!-- spawn model in gazebo -->
+    <node name="spawn_urdf"
+          pkg="gazebo_ros"
+          type="spawn_model"
+          args="-urdf -model $(arg name) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos)
+                -Y $(arg yaw) -param robot_description" />
+
+    <!-- connect robot TF tree to fixed world frame -->
+    <node pkg="tf2_ros"
+          type="static_transform_publisher"
+          name="offset_broadcaster"
+          args="0 0 0 0 0 0 $(arg world_frame) $(arg odom_frame)"/>
+
+    <node pkg="nodelet"
+          type="nodelet"
+          name="nav_base_nodelet"
+          output="screen"
+          args="standalone example/NavBaseNodelet">
+      <param name="world_frame"     value="$(arg world_frame)"/>
+      <param name="position_tol"    value="$(arg position_tol)"/>
+      <param name="heading_tol"     value="$(arg heading_tol)"/>
+      <param name="linear_vel_des"  value="$(arg linear_vel_des)"/>
+      <param name="angular_vel_des" value="$(arg angular_vel_des)"/>
+      <param name="linear_vel_inc"  value="$(arg linear_vel_inc)"/>
+      <param name="angular_vel_inc" value="$(arg angular_vel_inc)"/>
+      <param name="debug"           value="$(arg debug)"/>
+    </node>
+
+  </group>
+
+</launch>

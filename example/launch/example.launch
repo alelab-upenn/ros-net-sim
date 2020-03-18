@@ -1,0 +1,53 @@
+<launch>
+
+  <arg name="model"      default="$(optenv TURTLEBOT3_MODEL burger)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="gazebo_gui" default="false"/>
+  <arg name="rviz"       default="true"/>
+
+  <arg name="patrol_radius" default="55.0"/>
+  <param name="patrol_radius" value="$(arg patrol_radius)"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name"   value="$(find example)/worlds/spawc.world"/>
+    <arg name="paused"       value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui"          value="$(arg gazebo_gui)"/>
+    <arg name="headless"     value="false"/>
+    <arg name="debug"        value="false"/>
+  </include>  
+
+  <node pkg="rviz"
+        type="rviz"
+        name="rviz"
+        args="-d $(find example)/rviz/example.rviz"
+        output="screen"/>
+
+  <!-- load saved octomap -->
+  <node pkg="octomap_server"
+        type="octomap_server_node"
+        name="static_map_node"
+        args="$(find example)/maps/spawc_no_ground.bt"
+        output="screen">
+    <remap from="projected_map" to="/projected_map"/>
+    <param name="frame_id" value="world"/>
+  </node>
+
+  <!-- turtlebot 1 -->
+  <include file="$(find example)/launch/turtlebot3.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="name"  value="tb1"/>
+    <arg name="x_pos" value="$(eval arg('patrol_radius'))"/>
+    <arg name="yaw"   value="1.57"/>
+    <!--<arg name="yaw"   value="0.0"/>-->
+  </include>
+
+  <!-- turtlebot 2 -->
+  <include file="$(find example)/launch/turtlebot3.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="name"  value="tb2"/>
+    <arg name="x_pos" value="$(eval -arg('patrol_radius'))"/>
+    <arg name="yaw"   value="-1.57"/>
+    <!--<arg name="yaw"   value="1.57"/>-->
+  </include>
+
+</launch>

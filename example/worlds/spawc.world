@@ -1,0 +1,3176 @@
+<sdf version='1.6'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose frame=''>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.1 0.1 0.1 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.5 -1</direction>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics name='default_physics' default='0' type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='asphalt_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>0.093174 -0.081904 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>0.053944 19.9261 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_1'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-19.9 19.9152 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_2'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-19.9098 -0.010416 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_3'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-19.9981 -19.758 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_4'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>0.057665 -19.9927 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_5'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>20.044 19.9492 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_6'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>20.0084 -0.047308 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_7'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>20.0132 -20.0215 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_8'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-40.0916 39.9102 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_9'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-20.2185 40.2832 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_10'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>0.028054 40.1814 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_11'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>20.512 40.4379 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_12'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>39.7913 39.8154 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_13'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>39.9651 19.709 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_14'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>39.8821 -0.451924 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_15'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-39.9741 19.5723 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_16'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-39.8873 -0.349897 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_17'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-40.2864 -20.0364 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_18'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-39.608 -39.7939 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_19'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-18.9679 -39.9864 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_20'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>1.12614 -40.189 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_21'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>21.2365 -39.2037 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_22'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>40.3024 -18.7553 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_23'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>41.196 -39.2022 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>2454 648000000</sim_time>
+      <real_time>151 11860870</real_time>
+      <wall_time>1549909051 919353843</wall_time>
+      <iterations>150344</iterations>
+      <model name='Office Building'>
+        <pose frame=''>22.703 -20.5601 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>22.703 -20.5601 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='apartment'>
+        <pose frame=''>-19.2695 -18.1595 0 0 -0 1.5708</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-19.2695 -18.1595 0 0 -0 1.5708</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_0'>
+        <pose frame=''>0 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_1'>
+        <pose frame=''>-20 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_10'>
+        <pose frame=''>0 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_11'>
+        <pose frame=''>20 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_12'>
+        <pose frame=''>40 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_13'>
+        <pose frame=''>40 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_14'>
+        <pose frame=''>40 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_15'>
+        <pose frame=''>-40 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_16'>
+        <pose frame=''>-40 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_17'>
+        <pose frame=''>-40 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_18'>
+        <pose frame=''>-40 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_19'>
+        <pose frame=''>-20 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_2'>
+        <pose frame=''>-20 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_20'>
+        <pose frame=''>0 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_21'>
+        <pose frame=''>20 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_22'>
+        <pose frame=''>40 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_23'>
+        <pose frame=''>40 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_24'>
+        <pose frame=''>60 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_25'>
+        <pose frame=''>60 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_26'>
+        <pose frame=''>60 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_27'>
+        <pose frame=''>60 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_28'>
+        <pose frame=''>60 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_29'>
+        <pose frame=''>60 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_3'>
+        <pose frame=''>-20 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_30'>
+        <pose frame=''>60 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>60 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_31'>
+        <pose frame=''>40 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_32'>
+        <pose frame=''>20 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_33'>
+        <pose frame=''>0 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_34'>
+        <pose frame=''>-20 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_35'>
+        <pose frame=''>-40 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_36'>
+        <pose frame=''>-60 60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_37'>
+        <pose frame=''>-60 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_38'>
+        <pose frame=''>-60 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_39'>
+        <pose frame=''>-60 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_4'>
+        <pose frame=''>0 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_40'>
+        <pose frame=''>-60 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_41'>
+        <pose frame=''>-60 -40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 -40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_42'>
+        <pose frame=''>-60 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-60 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_43'>
+        <pose frame=''>-40 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_44'>
+        <pose frame=''>-20 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_45'>
+        <pose frame=''>0 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_46'>
+        <pose frame=''>20 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_47'>
+        <pose frame=''>40 -60 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>40 -60 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_5'>
+        <pose frame=''>20 20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_6'>
+        <pose frame=''>20 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_7'>
+        <pose frame=''>20 -20 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>20 -20 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_8'>
+        <pose frame=''>-40 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-40 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='asphalt_plane_9'>
+        <pose frame=''>-20 40 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20 40 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='ground_plane'>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='oak_tree'>
+        <pose frame=''>38.5774 -16.9737 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>38.5774 -16.9737 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='oak_tree_0'>
+        <pose frame=''>-20.6566 37.8354 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20.6566 37.8354 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='oak_tree_2'>
+        <pose frame=''>-20.5395 -35.2689 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-20.5395 -35.2689 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='radio_tower'>
+        <pose frame=''>-8.01607 39.0151 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-8.01607 39.0151 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='school'>
+        <pose frame=''>-18.3865 20.1228 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose frame=''>-18.3865 20.1228 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <model name='apartment'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://apartment/meshes/apartment.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://apartment/meshes/apartment.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-19.2695 -3.15946 0 0 -0 0</pose>
+    </model>
+    <model name='Office Building'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://office_building/meshes/office_building.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://office_building/meshes/office_building.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-17.297 -34.5601 0 0 -0 0</pose>
+    </model>
+    <model name='school'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://school/meshes/school.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://school/meshes/school.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-29.3865 34.1228 0 0 -0 0</pose>
+    </model>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose frame=''>27.3794 125.37 141.967 0 0.853796 -1.85184</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <model name='asphalt_plane_24'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>59.6132 -59.719 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_25'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>60.0957 -39.8679 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_26'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>59.7963 -19.7859 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_27'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>60.3544 -0.02517 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_28'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>60.072 19.3811 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_29'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>59.3531 39.4636 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_30'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>59.6953 60.0696 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_31'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>39.1923 60.136 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_32'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>19.5711 60.3461 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_33'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-1.52655 60.2759 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_34'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-19.3528 60.1307 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_35'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-39.3567 59.1729 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_36'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-59.6961 59.3831 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_37'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.228 38.9864 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_38'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.18 19.41 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_39'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.4343 -1.02835 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_40'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.4482 -20.8305 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_41'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.4665 -41.0207 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_42'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-60.1859 -61.7926 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_43'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-40.1815 -60.2742 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_44'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-20.6408 -60.7997 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_45'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-0.727462 -60.9589 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_46'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>19.478 -60.8881 0 0 -0 0</pose>
+    </model>
+    <model name='asphalt_plane_47'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <box>
+              <size>20 20 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://asphalt_plane/materials/scripts</uri>
+              <uri>model://asphalt_plane/materials/textures</uri>
+              <name>vrc/asphalt</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>39.4876 -60.6245 0 0 -0 0</pose>
+    </model>
+    <model name='oak_tree'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='branch'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Branch</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Branch</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='bark'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Bark</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Bark</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>38.5774 -10.9737 0 0 -0 0</pose>
+    </model>
+    <model name='oak_tree_0'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='branch'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Branch</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Branch</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='bark'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Bark</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Bark</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>4.34339 16.8354 0 0 -0 0</pose>
+    </model>
+    <model name='oak_tree_2'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='branch'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Branch</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Branch</name>
+            </script>
+          </material>
+        </visual>
+        <visual name='bark'>
+          <geometry>
+            <mesh>
+              <uri>model://oak_tree/meshes/oak_tree.dae</uri>
+              <submesh>
+                <name>Bark</name>
+              </submesh>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <material>
+            <script>
+              <uri>model://oak_tree/materials/scripts/</uri>
+              <uri>model://oak_tree/materials/textures/</uri>
+              <name>OakTree/Bark</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-25.5395 -35.2689 0 0 -0 0</pose>
+    </model>
+    <model name='radio_tower'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <mesh>
+              <uri>model://radio_tower/meshes/radio_tower.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <geometry>
+            <mesh>
+              <uri>model://radio_tower/meshes/radio_tower.dae</uri>
+              <scale>1 1 1</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <kinematic>0</kinematic>
+        <gravity>1</gravity>
+      </link>
+      <pose frame=''>-8.01607 39.0151 0 0 -0 0</pose>
+    </model>
+  </world>
+</sdf>
