@@ -8,8 +8,8 @@ mac_list:
 
 # this are the models to track
 gazebo_models:
-  - agent1
-  - agent2
+  - tb1
+  - tb2
 
 print_debug: false
 

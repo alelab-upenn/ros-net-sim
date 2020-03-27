@@ -1,22 +1,40 @@
 <launch>
 
-  <arg name="model"      default="$(optenv TURTLEBOT3_MODEL burger)" doc="model type [burger, waffle, waffle_pi]"/>
-  <arg name="gazebo_gui" default="false"/>
-  <arg name="rviz"       default="true"/>
+  <arg name="model"         default="$(optenv TURTLEBOT3_MODEL burger)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="gazebo_gui"    default="false"/>
+  <arg name="rviz"          default="true"/>
+  <arg name="custom_main"   default="true"/>
 
   <arg name="patrol_radius" default="55.0"/>
   <param name="patrol_radius" value="$(arg patrol_radius)"/>
 
-  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+  <!-- load shared experiment config file -->
+  <rosparam command="load" file="$(find example)/cfg/example.yaml"/>
+
+  <!-- launch gazebo without custom main -->
+  <include unless="$(arg custom_main)"
+           file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name"   value="$(find example)/worlds/spawc.world"/>
     <arg name="paused"       value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui"          value="$(arg gazebo_gui)"/>
     <arg name="headless"     value="false"/>
     <arg name="debug"        value="false"/>
-  </include>  
+  </include>
 
-  <node pkg="rviz"
+  <!-- launch gazebo with custom main -->
+  <include if="$(arg custom_main)"
+           file="$(find physics_coordinator)/launch/custom_main_empty_world.launch">
+    <arg name="world_name"   value="$(find example)/worlds/spawc.world"/>
+    <arg name="paused"       value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui"          value="$(arg gazebo_gui)"/>
+    <arg name="headless"     value="false"/>
+    <arg name="debug"        value="false"/>
+  </include>
+
+  <node if="$(arg rviz)"
+        pkg="rviz"
         type="rviz"
         name="rviz"
         args="-d $(find example)/rviz/example.rviz"
@@ -30,6 +48,14 @@
         output="screen">
     <remap from="projected_map" to="/projected_map"/>
     <param name="frame_id" value="world"/>
+  </node>
+
+  <!-- pathloss segment node -->
+  <node pkg="channel_simulator"
+        type="segment_node"
+        name="pathloss_segment_node"
+        output="screen">
+    <remap from="octomap" to="/octomap_binary"/>
   </node>
 
   <!-- turtlebot 1 -->
