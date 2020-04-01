@@ -4,6 +4,9 @@
   <arg name="gazebo_gui"    default="false"/>
   <arg name="rviz"          default="true"/>
   <arg name="custom_main"   default="true"/>
+  <arg name="debug"         default="false"/> <!-- if true: runs gazebo_custom_main.cpp in gdb -->
+  <arg name="verbose"       default="false"/>
+  <arg name="paused"        default="false"/>
 
   <arg name="patrol_radius" default="55.0"/>
   <param name="patrol_radius" value="$(arg patrol_radius)"/>
@@ -15,22 +18,24 @@
   <include unless="$(arg custom_main)"
            file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name"   value="$(find example)/worlds/spawc.world"/>
-    <arg name="paused"       value="false"/>
+    <arg name="paused"       value="$(arg paused)"/>
     <arg name="use_sim_time" value="true"/>
-    <arg name="gui"          value="$(arg gazebo_gui)"/>
     <arg name="headless"     value="false"/>
-    <arg name="debug"        value="false"/>
+    <arg name="gui"          value="$(arg gazebo_gui)"/>
+    <arg name="debug"        value="$(arg debug)"/>
+    <arg name="verbose"      value="$(arg verbose)"/>
   </include>
 
   <!-- launch gazebo with custom main -->
   <include if="$(arg custom_main)"
            file="$(find physics_coordinator)/launch/custom_main_empty_world.launch">
     <arg name="world_name"   value="$(find example)/worlds/spawc.world"/>
-    <arg name="paused"       value="false"/>
+    <arg name="paused"       value="$(arg paused)"/>
     <arg name="use_sim_time" value="true"/>
-    <arg name="gui"          value="$(arg gazebo_gui)"/>
     <arg name="headless"     value="false"/>
-    <arg name="debug"        value="false"/>
+    <arg name="gui"          value="$(arg gazebo_gui)"/>
+    <arg name="debug"        value="$(arg debug)"/>
+    <arg name="verbose"      value="$(arg verbose)"/>
   </include>
 
   <node if="$(arg rviz)"

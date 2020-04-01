@@ -172,12 +172,23 @@ int main(int argc, char **argv)
   GCM_INFO("setting up server");
   gazebo::setupServer(argvec);
 
+  // command line args only get processed by system plugins when running gazebo
+  // as a library so we need to parse any pertinent ones ourselves [see
+  // docstring for gazebo.hh:setupServer]
+  for (const std::string& arg : argvec) {
+    if (arg.compare("--verbose") == 0) {
+      GCM_INFO("setting gazebo logging to verbose");
+      gazebo::printVersion();
+      gazebo::common::Console::SetQuiet(false);
+    }
+  }
+
   // parse args for world file
   std::string world_file;
   for (auto& str : argvec) {
     if (str.find(".world") != std::string::npos) {
       world_file = str;
-      GCM_INFO("found world file: %s", str.c_str());
+      GCM_INFO("world file arg: %s", str.c_str());
       break;
     }
   }
@@ -199,9 +210,9 @@ int main(int argc, char **argv)
   }
 
   //wait for libgazebo_ros_api_plugin to initialize ROS node
-  ros::Rate delay(1);
+  ros::Rate delay(10);
   while (!ros::isInitialized()) {
-    GCM_INFO("waiting for libgazebo_ros_api_plugin to initialize");
+    ROS_INFO_THROTTLE(1.0, "[gazebo_custom_main] waiting for libgazebo_ros_api_plugin to initialize");
     delay.sleep();
   }
 
@@ -226,11 +237,12 @@ int main(int argc, char **argv)
   } else {
     gazebo_iterations = 1e-3*simulation_step_time_ms / pe->GetMaxStepSize();
     GCM_INFO("current gazebo simulation timestep: %.3f s,"
-             " desired simulation step time: %d ms ... gazebo simulation will "
+             " desired simulation step time: %d ms; gazebo simulation will "
              "advance %d iterations each sync cycle", pe->GetMaxStepSize(),
              simulation_step_time_ms, gazebo_iterations);
   }
 
+  // TODO get rid of this
   // run world until the agents have spawned
 
   XmlRpc::XmlRpcValue gazebo_models_list;
@@ -257,6 +269,7 @@ int main(int argc, char **argv)
   }
   GCM_INFO("all models have been loaded");
 
+  GCM_INFO("setting up UDS socket");
   //Create and connect UDS Socket
   boost::asio::io_service io_service;
   ::unlink("/tmp/phy_server_socket");
@@ -285,4 +298,6 @@ int main(int argc, char **argv)
 
     ros::spinOnce();
   }
+
+  gazebo::shutdown();
 }
