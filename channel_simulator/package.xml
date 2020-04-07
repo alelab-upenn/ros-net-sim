@@ -6,11 +6,12 @@
 
   <maintainer email="cfullana@seas.upenn.edu">Miguel Calvo-Fullana</maintainer>
   <maintainer email="mox@seas.upenn.edu">Daniel Mox</maintainer>
-  
+
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
   <depend>geometry_msgs</depend>
+  <depend>gazebo_msgs</depend>
   <depend>message_generation</depend>
   <depend>message_runtime</depend>
   <depend>octomap</depend>

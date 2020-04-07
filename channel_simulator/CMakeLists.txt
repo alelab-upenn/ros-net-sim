@@ -5,6 +5,7 @@ add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED
   geometry_msgs
+  gazebo_msgs
   message_generation
   octomap_msgs
   roscpp

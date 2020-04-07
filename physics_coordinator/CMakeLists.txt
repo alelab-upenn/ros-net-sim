@@ -9,7 +9,7 @@ find_package(catkin REQUIRED
   protobuf_msgs
   roscpp
 )
-
+find_package(gazebo REQUIRED)
 find_package(Boost REQUIRED system iostreams)
 
 catkin_package(
