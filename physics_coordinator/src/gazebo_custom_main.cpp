@@ -1,20 +1,23 @@
 #include <gazebo/gazebo.hh>
 #include <gazebo/common/common.hh>
 #include <gazebo/physics/physics.hh>
+#include <gazebo/sensors/SensorsIface.hh>
 #include <ros/ros.h>
 
 #include <protobuf_msgs/physics_update.pb.h>
 #include <protobuf_msgs/channel_data.pb.h>
 
-#include <boost/asio.hpp>
-
-#include <boost/iostreams/filtering_streambuf.hpp>
-#include <boost/iostreams/copy.hpp>
-#include <boost/iostreams/filter/gzip.hpp>
-
 #include <gazebo_msgs/GetModelState.h>
 #include <channel_simulator/PathlossPair.h>
 #include <channel_simulator/PathlossPairArray.h>
+
+#include <thread>
+#include <chrono>
+
+#include <boost/asio.hpp>
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/copy.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
 
 
 #define GCM_INFO(fmt, ...) ROS_INFO("[gazebo_custom_main] " fmt, ##__VA_ARGS__)
@@ -146,6 +149,16 @@ std::string generate_response(std::string channel_data, physics_update_proto::Ph
 }
 
 
+void sensorThread()
+{
+  GCM_INFO("starting sensor thread");
+  while (ros::ok()) {
+    gazebo::sensors::run_once();
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+}
+
+
 int main(int argc, char **argv)
 {
   /*
@@ -258,6 +271,16 @@ int main(int argc, char **argv)
     gazebo_models.push_back(static_cast<std::string>(gazebo_models_list[i]));
   }
 
+  // NOTE quoting from the gazebo source code: "Make sure the sensors are
+  // updated once before running the world. This makes sure plugins get loaded
+  // properly."
+  gazebo::sensors::run_once(true);
+  gazebo::sensors::run_threads();
+
+  // Sensors are not updated along with runWorld(...) and must be regularly
+  // updated independent of the thread of execution that includes runWorld(...).
+  std::thread sensor_thread(sensorThread);
+
   for (auto& model : gazebo_models) {
     gazebo::physics::ModelPtr model_ptr = world->ModelByName(model);
     while (model_ptr == nullptr) {
@@ -299,5 +322,6 @@ int main(int argc, char **argv)
     ros::spinOnce();
   }
 
+  sensor_thread.join();
   gazebo::shutdown();
 }
