@@ -1,6 +1,6 @@
 # ROS-NetSim 
 ### A Framework for the Integration of Robotic and Network Simulators
-
+> Implimentation of [this paper](https://arxiv.org/abs/2101.10113)
 <p align="center">
   <img src="./architecture.png" alt="ROS-NetSim architecture" width="400">
 </p>
