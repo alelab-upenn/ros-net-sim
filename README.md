@@ -11,20 +11,26 @@ ROS-NetSim is a ROS package that acts as an interface between robotic and networ
 * Agnostic to the specific network and physics simulator being used
 * Tunable in fidelity and complexity
 
+## Dependencies
+```zsh
+pip3 install pyquaternion
+```
+
 ## Installation
 
-Clone the repository and execute the following commands:
+```zsh
+# (OPTIONAL)
+# mkdir -p ~/catkin_ws/src
 
+# Navigate to catkin your catkin workspace
+cd ~/catkin_ws
+# Clone project into src
+git clone git@github.com:tylerferrara/ros-net-sim.git ./src/ROS-NetSim
+# Install dependencies
+rosdep install -i --from-path ./src --rosdistro $ROS_DISTRO -y
+# Build and install with C++20
+catkin_make install --cmake-args -DCMAKE_CXX_STANDARD=20
 ```
-cd <repo_root>
-source /opt/ros/melodic/setup.bash
-rosdep install -i --from-paths . -y
-catkin init
-catkin config --cmake-args -DPYTHON_EXECUTABLE=/path/to/python3
-catkin build
-```
-
-On the author's machine the python 3 executable was found at: ```/usr/bin/python3```
 
 ## Testing ROS-NetSim
 
