@@ -28,8 +28,10 @@ cd ~/catkin_ws
 git clone git@github.com:tylerferrara/ros-net-sim.git ./src/ROS-NetSim
 # Install dependencies
 rosdep install -i --from-path ./src --rosdistro $ROS_DISTRO -y
-# Build and install with C++20
-catkin_make install --cmake-args -DCMAKE_CXX_STANDARD=20
+# Use C++20 and python3
+catkin config --cmake-args --cmake-args -DCMAKE_CXX_STANDARD=20 -DPYTHON_EXECUTABLE=/path/to/python3
+# Build and install
+catkin_make
 ```
 
 ## Testing ROS-NetSim
