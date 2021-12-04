@@ -19,6 +19,11 @@ import numpy as np
 import select
 import yaml
 
+import protobuf_msgs
+print('***************************************************')
+print('***************************************************')
+print(protobuf_msgs)
+
 import protobuf_msgs.physics_update_pb2 as phyud
 import protobuf_msgs.network_update_pb2 as netud
 

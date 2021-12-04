@@ -161,7 +161,7 @@ def driver_process(config):
 
 
 def main(args):
-    if len(args) != 2:
+    if len(args) < 2:
         print("usage: phy_sim_dummy.py <config_file>")
     else:
         with open(args[1]) as f:
