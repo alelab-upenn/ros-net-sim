@@ -5,7 +5,7 @@ from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
     packages=['example'],
-    package_dir={'': 'scripts'}
+    package_dir={'': '..'}
 )
 
 setup(**d)
