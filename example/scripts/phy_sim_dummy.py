@@ -161,10 +161,17 @@ def driver_process(config):
 
 
 def main(args):
-    if len(args) != 2:
+    # Capture config
+    config_file = None
+    for arg in args:
+        if ".yaml" in arg:
+            config_file = arg
+            break
+        
+    if config_file is None:
         print("usage: phy_sim_dummy.py <config_file>")
     else:
-        with open(args[1]) as f:
+        with open(config_file) as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
             if config['do_driver_transfer']:
                 ranging_process = multiprocessing.Process(target=driver_process, args=(config,))

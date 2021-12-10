@@ -1,9 +1,0 @@
-<launch>
-
-  <node pkg="example"
-        type="net_sim_dummy.py"
-        name="net_sim_dummy"
-        output="screen"
-        args="$(find example)/cfg/example.yaml"/>
-
-</launch>
