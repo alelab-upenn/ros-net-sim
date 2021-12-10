@@ -19,11 +19,6 @@ import numpy as np
 import select
 import yaml
 
-import protobuf_msgs
-print('***************************************************')
-print('***************************************************')
-print(protobuf_msgs)
-
 import protobuf_msgs.physics_update_pb2 as phyud
 import protobuf_msgs.network_update_pb2 as netud
 
@@ -71,9 +66,7 @@ class NetworkCoordinator:
             # ~ sudo ip tuntap add dev tun0 mode tun
             # ~ sudo ip link set tun0 up
             # ~ sudo ip addr add 192.168.0.1/32 dev tun0
-            
-            # NOTE: First command needs to read the root password from standard in (requiring the -S flag)
-            subprocess.call(["sudo", "-S", "ip", "tuntap", "add", "dev", "tun" + str(i), "mode", "tun"])
+            subprocess.call(["sudo", "ip", "tuntap", "add", "dev", "tun" + str(i), "mode", "tun"])
             subprocess.call(["sudo", "ip", "link", "set", "tun" + str(i), "up"])
             subprocess.call(["sudo", "ip", "addr", "add", ip_i + "/32", "dev", "tun" + str(i)])
 
@@ -585,17 +578,10 @@ class AtomicCounter:
 
 
 def main(args):
-    # Capture config
-    config_file = None
-    for arg in args:
-        if ".yaml" in arg:
-            config_file = arg
-            break
-        
-    if config_file is None:
+    if len(args) != 2:
         print("usage: network_coordinator.py <config_file>")
     else:
-        network_coordinator = NetworkCoordinator(config_file)
+        network_coordinator = NetworkCoordinator(args[1])
         network_coordinator.run_network_coordinator()
     return 0
 

@@ -1,0 +1,21 @@
+<launch>
+
+  <node pkg="network_coordinator"
+        type="network_coordinator.py"
+        name="network_coordinator"
+        output="screen"
+        args="$(find example)/cfg/example.yaml"/>
+
+  <node pkg="example"
+        type="net_sim_dummy.py"
+        name="net_sim_dummy"
+        output="screen"
+        args="$(find example)/cfg/example.yaml"/>
+
+  <node pkg="example"
+        type="phy_sim_dummy.py"
+        name="phy_sim_dummy"
+        output="screen"
+        args="$(find example)/cfg/example.yaml"/>
+
+</launch>

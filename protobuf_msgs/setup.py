@@ -8,7 +8,11 @@ p = Path(os.path.dirname(os.path.realpath(__file__))).parent.absolute()
 
 d = generate_distutils_setup(
     packages=['protobuf_msgs'],
+<<<<<<< HEAD
     package_dir={'': str(p)}
+=======
+    package_dir={'': '..'}
+>>>>>>> dev
 )
 
 setup(**d)
