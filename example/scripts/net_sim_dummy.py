@@ -40,7 +40,6 @@ def run_protobuf_server(config):
     sock.bind(server_address)
 
     try:
-        print("Hit Ctrl-c to exit")
         sock.listen(1)
         connection, client_address = sock.accept()
         while True:
@@ -75,8 +74,8 @@ def gen_response(time_update,ip_list):
     for i, id_i in enumerate(time_update.pkt_id):
         ip_dst=socket.inet_ntoa(struct.pack('!L', time_update.dst_ip[i]))
         if ip_dst in ip_list:
-            print("Packet captured. Destination: %s. Delaying for 500ms." % ip_dst)
-            time.sleep(0.5)
+            print("Packet captured. Destination: %s. Delaying for 50ms." % ip_dst)
+            time.sleep(0.05)
         time_update.ber.append(1e-9)
         time_update.rx_ip.append(time_update.dst_ip[i])  # not dealing with broadcast
     del time_update.pkt_lengths[:]

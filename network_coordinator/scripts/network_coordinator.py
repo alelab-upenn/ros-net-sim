@@ -97,7 +97,7 @@ class NetworkCoordinator:
             # ~ sudo ip tuntap del dev tun0 mode tun
             # ~ sudo ip rule del table 1
             # ~ sudo ip rule del table 101
-            subprocess.call(["sudo", "ip", "tuntap", "del", "dev", "tun" + str(i), "mode", "tun"])
+            subprocess.call(["sudo", "-S", "ip", "tuntap", "del", "dev", "tun" + str(i), "mode", "tun"])
             subprocess.call(["sudo", "ip", "rule", "del", "table", str(i + 1)])
             subprocess.call(["sudo", "ip", "rule", "del", "table", str(i + 101)])
 

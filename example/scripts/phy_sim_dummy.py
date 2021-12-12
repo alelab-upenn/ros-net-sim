@@ -42,7 +42,6 @@ def run_protobuf_server(config):
 
     try:
         prev_time=0
-        print("Hit Ctrl-c to exit")
         sock.listen(1)
         connection, client_address = sock.accept()
         while True:
@@ -60,11 +59,16 @@ def run_protobuf_server(config):
                     print(channel_data)
 
                 NetworkCoordinator.send_one_message(connection, data)
-            except socket.error:
-                raise KeyboardInterrupt
+            except socket.error as err:
+                # Check for Broken Pipe
+                print(err)
+                if err.errno == 32:
+                    continue
+                else:
+                    raise KeyboardInterrupt
 
     except KeyboardInterrupt:
-        print("\nExiting physics simulator dummy main process")
+        print("\nExiting physics simulator interruption")
 
     finally:
         sock.close()
