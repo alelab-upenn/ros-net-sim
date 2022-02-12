@@ -38,6 +38,7 @@ include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 
 add_executable(gazebo_custom_main src/gazebo_custom_main.cpp)
+add_dependencies(gazebo_custom_main ${catkin_EXPORTED_TARGETS})
 target_link_libraries(gazebo_custom_main ${GAZEBO_LIBRARIES} ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 configure_file(scripts/gazebo_custom_server ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/gazebo_custom_server COPYONLY)

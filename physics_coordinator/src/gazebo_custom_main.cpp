@@ -13,8 +13,8 @@
 #include <boost/iostreams/filter/gzip.hpp>
 
 #include <gazebo_msgs/GetModelState.h>
-#include <channel_simulator/PathlossPair.h>
-#include <channel_simulator/PathlossPairArray.h>
+#include "channel_simulator/PathlossPair.h"
+#include "channel_simulator/PathlossPairArray.h"
 
 
 #define GCM_INFO(fmt, ...) ROS_INFO("[gazebo_custom_main] " fmt, ##__VA_ARGS__)

@@ -10,7 +10,6 @@
   <license>TODO</license>
 
   <buildtool_depend>catkin</buildtool_depend>
-
   <depend>channel_simulator</depend>
   <depend>gazebo_ros</depend>
   <depend>gazebo</depend>
