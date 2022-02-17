@@ -41,17 +41,17 @@ def run_protobuf_server(config):
     sock.bind(server_address)
 
     try:
-        prev_time=0
+        prev_time = 0
         sock.listen(1)
         connection, client_address = sock.accept()
         while True:
             try:
                 num_nodes = len(config['mac_list'])
                 data = gzip.decompress(NetworkCoordinator.recv_one_message(connection))
-                data = gzip.compress(gen_response(parse_request(data),num_nodes))
+                data = gzip.compress(gen_response(parse_request(data), num_nodes))
                 cur_time = time.time()
                 if cur_time - prev_time > 2:
-                    prev_time=time.time()
+                    prev_time = time.time()
                     time_update = phyud.PhysicsUpdate()
                     time_update.ParseFromString(gzip.decompress(data))
                     channel_data = cd.ChannelData()
@@ -61,11 +61,8 @@ def run_protobuf_server(config):
                 NetworkCoordinator.send_one_message(connection, data)
             except socket.error as err:
                 # Check for Broken Pipe
-                print(err)
-                if err.errno == 32:
-                    continue
-                else:
-                    raise KeyboardInterrupt
+                print("Error by physics_sim potobuf server:", err)
+                raise KeyboardInterrupt
 
     except KeyboardInterrupt:
         print("\nExiting physics simulator interruption")
@@ -82,7 +79,7 @@ def parse_request(req):
     return time_update
 
 
-def gen_response(time_update,num_nodes):
+def gen_response(time_update, num_nodes):
     time_update.msg_type = phyud.PhysicsUpdate.END
     data = generate_data(num_nodes)
     time_update.channel_data = gzip.compress(data)
@@ -132,7 +129,8 @@ def driver_process(config):
             sock.listen(1)
             connection, _ = sock.accept()
             print(f"Connected to {addr}")
-            if id == 1: time.sleep(0.5)
+            if id == 1:
+                time.sleep(0.5)
             mac_tuple = ("1a", "2a")
             src_mac, dst_mac = mac_tuple if id == 0 else mac_tuple[::-1]
 
@@ -140,10 +138,11 @@ def driver_process(config):
 
             try:
                 while True:
-                    print(f"Sent: " + (request))
+                    print("Sent: " + (request))
                     NetworkCoordinator.send_one_message(connection, request.encode("utf-8"))
                     r, __, __ = select.select([connection, ], [], [], 0)
-                    if r: print(f"Received: " + (NetworkCoordinator.recv_one_message(connection)).decode("utf-8"))
+                    if r:
+                        print("Received: " + (NetworkCoordinator.recv_one_message(connection)).decode("utf-8"))
                     time.sleep(5)
             except socket.error:
                 return
@@ -156,12 +155,15 @@ def driver_process(config):
             thread.start()
             threads.append(thread)
             id += 1
-        for t in threads: t.join()
+        for t in threads:
+            t.join()
 
     finally:
         print("\nExiting physics simulator dummy driver process")
-        for sock in socket_list: sock.close()
-        for address in addresses: os.unlink(address)
+        for sock in socket_list:
+            sock.close()
+        for address in addresses:
+            os.unlink(address)
 
 
 def main(args):
@@ -171,7 +173,7 @@ def main(args):
         if ".yaml" in arg:
             config_file = arg
             break
-        
+
     if config_file is None:
         print("usage: phy_sim_dummy.py <config_file>")
     else:

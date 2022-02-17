@@ -14,7 +14,7 @@ gazebo_models:
   - tb3_1
   - tb3_2
 
-print_debug: false
+print_debug: true
 
 net_use_uds: true
 phy_use_uds: true
