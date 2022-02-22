@@ -2,20 +2,17 @@ ip_list:
   - 192.168.0.1
   - 192.168.0.2
   - 192.168.0.3
-  - 192.168.0.4
 
 mac_list:
   - a1
   - a2
   - a3
-  - a4
 
 # this are the models to track
 gazebo_models:
   - tb3_0
   - tb3_1
   - tb3_2
-  - tb3_3
 
 print_debug: true
 

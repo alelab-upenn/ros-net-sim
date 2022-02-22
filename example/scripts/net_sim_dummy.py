@@ -15,8 +15,7 @@ import yaml
 
 import protobuf_msgs.channel_data_pb2 as cd
 import protobuf_msgs.network_update_pb2 as netud
-from network_coordinator import NetworkCoordinator
-
+from network_coordinator import send_one_message, recv_one_message
 
 
 def run_protobuf_server(config):
@@ -44,9 +43,9 @@ def run_protobuf_server(config):
         connection, client_address = sock.accept()
         while True:
             try:
-                data = NetworkCoordinator.recv_one_message(connection)
+                data = recv_one_message(connection)
                 data = gzip.compress(gen_response(parse_request(gzip.decompress(data)),config['ip_list']))
-                NetworkCoordinator.send_one_message(connection, data)
+                send_one_message(connection, data)
             except socket.error:
                 connection.close()
                 raise KeyboardInterrupt
@@ -112,6 +111,7 @@ def parse_phy_message(data):
     else:
         path_details = None
 
+
 def driver_process(config):
     if config['net_use_uds']:
         server_address = config['net_driver_uds_server_address']
@@ -135,7 +135,7 @@ def driver_process(config):
             r, __, __ = select.select((driver_connection,), [], [], 2)
             if not r: continue
             try:
-                driver_requests = NetworkCoordinator.recv_one_message(driver_connection)
+                driver_requests = recv_one_message(driver_connection)
                 if not driver_requests: break
                 driver_requests = json.loads(gzip.decompress(driver_requests))
 
@@ -148,15 +148,16 @@ def driver_process(config):
                             request["type"] = "driver_reply"
                             driver_responses.append(request)
                 if driver_responses:
-                    NetworkCoordinator.send_one_message(driver_connection,
-                                          gzip.compress(json.dumps(driver_responses).encode("utf-8")))
+                    send_one_message(
+                        driver_connection,
+                        gzip.compress(json.dumps(driver_responses).encode("utf-8")))
             except socket.error:
                 return
     finally:
         print("\nExiting network simulator dummy driver process")
         sock.close()
-        if config['net_use_uds']: os.unlink(server_address)
-
+        if config['net_use_uds']:
+            os.unlink(server_address)
 
 
 def main(args):
@@ -166,7 +167,7 @@ def main(args):
         if ".yaml" in arg:
             config_file = arg
             break
-        
+
     if config_file is None:
         print("usage: net_sim_dummy.py <config_file>")
     else:

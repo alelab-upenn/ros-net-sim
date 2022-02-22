@@ -18,7 +18,7 @@ import yaml
 
 import protobuf_msgs.channel_data_pb2 as cd
 import protobuf_msgs.physics_update_pb2 as phyud
-from network_coordinator import NetworkCoordinator
+from network_coordinator import send_one_message, recv_one_message
 
 
 def run_protobuf_server(config):
@@ -47,7 +47,7 @@ def run_protobuf_server(config):
         while True:
             try:
                 num_nodes = len(config['mac_list'])
-                data = gzip.decompress(NetworkCoordinator.recv_one_message(connection))
+                data = gzip.decompress(recv_one_message(connection))
                 data = gzip.compress(gen_response(parse_request(data), num_nodes))
                 cur_time = time.time()
                 if cur_time - prev_time > 2:
@@ -58,7 +58,7 @@ def run_protobuf_server(config):
                     channel_data.ParseFromString(gzip.decompress(time_update.channel_data))
                     print(channel_data)
 
-                NetworkCoordinator.send_one_message(connection, data)
+                send_one_message(connection, data)
             except socket.error as err:
                 # Check for Broken Pipe
                 print("Error by physics_sim potobuf server:", err)
@@ -139,10 +139,10 @@ def driver_process(config):
             try:
                 while True:
                     print("Sent: " + (request))
-                    NetworkCoordinator.send_one_message(connection, request.encode("utf-8"))
+                    send_one_message(connection, request.encode("utf-8"))
                     r, __, __ = select.select([connection, ], [], [], 0)
                     if r:
-                        print("Received: " + (NetworkCoordinator.recv_one_message(connection)).decode("utf-8"))
+                        print("Received: " + (recv_one_message(connection)).decode("utf-8"))
                     time.sleep(5)
             except socket.error:
                 return

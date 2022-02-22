@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+from __future__ import annotations
 import gzip
 import ipaddress
 import json
@@ -12,20 +12,20 @@ import subprocess
 import sys
 import threading
 import time
-
-import array
 import fcntl
 import numpy as np
 import select
 import yaml
-
+from typing import List
+from network_coordinator.utils import setup_network, remove_network, generate_ipv4_checksum, recv_one_message, send_one_message, try_connecting, get_flip_locations
+from network_coordinator.constants import IFF_TUN, IFF_NO_PI, TUNSETOWNER, TUNSETIFF
 import protobuf_msgs.physics_update_pb2 as phyud
 import protobuf_msgs.network_update_pb2 as netud
 
 
 class NetworkCoordinator:
 
-    def __init__(self, config_file):
+    def __init__(self: NetworkCoordinator, config_file):
 
         # event used to indicate whether threads are allowed to run
         self.run_event = multiprocessing.Event()
@@ -61,51 +61,7 @@ class NetworkCoordinator:
             self.phy_use_uds = self.config['phy_use_uds']
             self.net_use_uds = self.config['net_use_uds']
 
-    def _setup_network(self):
-        for i, ip_i in enumerate(self.config['ip_list']):
-            # ~ sudo ip tuntap add dev tun0 mode tun
-            # ~ sudo ip link set tun0 up
-            # ~ sudo ip addr add 192.168.0.1/32 dev tun0
-            subprocess.call(["sudo", "ip", "tuntap", "add", "dev", "tun" + str(i), "mode", "tun"])
-            subprocess.call(["sudo", "ip", "link", "set", "tun" + str(i), "up"])
-            subprocess.call(["sudo", "ip", "addr", "add", ip_i + "/32", "dev", "tun" + str(i)])
-
-            # ~ sudo ip route add 192.168.0.2/32 dev tun0 src 192.168.0.1 table 1
-            # ~ sudo ip rule add table 1 from 192.168.0.1 priority 2
-            for j, ip_j in enumerate(self.config['ip_list']):
-                if j != i:
-                    subprocess.call(["sudo", "ip", "route", "add", ip_j + "/32", "dev", "tun" + str(i),
-                                     "src", ip_i, "table", str(i + 1)])
-            subprocess.call(["sudo", "ip", "rule", "add", "table", str(i + 1), "from", ip_i, "priority", "2"])
-
-            # ~ #Conditional local
-            # ~ sudo ip rule add iif tun0 lookup 101 priority 1
-            # ~ sudo ip route add local 192.168.0.1 dev tun0 table 101
-            subprocess.call(["sudo", "ip", "rule", "add", "iif", "tun" + str(i), "table", str(i + 101), "priority", "1"])
-            subprocess.call(["sudo", "ip", "route", "add", "local", ip_i, "dev", "tun" + str(i), "table", str(i + 101)])
-
-        # ~ sudo ip rule del pref 0 from all lookup local
-        # ~ sudo ip rule add pref 10 from all lookup local
-        subprocess.call(["sudo", "ip", "rule", "del", "pref", "0", "from", "all", "lookup", "local"])
-        subprocess.call(["sudo", "ip", "rule", "add", "pref", "10", "from", "all", "lookup", "local"])
-        return self.config['ip_list']
-
-    @staticmethod
-    def _remove_network(num_ips):
-        for i in range(num_ips):
-            # ~ sudo ip tuntap del dev tun0 mode tun
-            # ~ sudo ip rule del table 1
-            # ~ sudo ip rule del table 101
-            subprocess.call(["sudo", "ip", "tuntap", "del", "dev", "tun" + str(i), "mode", "tun"])
-            subprocess.call(["sudo", "ip", "rule", "del", "table", str(i + 1)])
-            subprocess.call(["sudo", "ip", "rule", "del", "table", str(i + 101)])
-
-        # ~ sudo ip rule add pref 0 from all lookup local
-        # ~ sudo ip rule del pref 10 from all lookup local
-        subprocess.call(["sudo", "ip", "rule", "add", "pref", "0", "from", "all", "lookup", "local"])
-        subprocess.call(["sudo", "ip", "rule", "del", "pref", "10", "from", "all", "lookup", "local"])
-
-    def _read_from_tuns(self, i, tuns):
+    def _read_from_tuns(self: NetworkCoordinator, i, tuns):
         while self.run_event.is_set():
             # read from TUN
             try:
@@ -133,7 +89,7 @@ class NetworkCoordinator:
         print("TUN " + str(i) + " exiting")
         tuns[i].close()
 
-    def _run_protobuf_client_phy_coord(self):
+    def _run_protobuf_client_phy_coord(self: NetworkCoordinator):
 
         # Connect the socket to the port where the server is listening
         if self.phy_use_uds:
@@ -147,7 +103,7 @@ class NetworkCoordinator:
             sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_QUICKACK, 1)
 
         try:
-            if self.try_connecting(sock, server_address, "Error (physics coordinator protobuf client):") == -1:
+            if try_connecting(sock, server_address, "Error (physics coordinator protobuf client):") == -1:
                 self.run_event.clear()
                 return
             waiting_for_update = False
@@ -158,14 +114,14 @@ class NetworkCoordinator:
                     time_update = phyud.PhysicsUpdate()
                     time_update.time_val = self.time_counter.value
                     time_update.msg_type = phyud.PhysicsUpdate.BEGIN
-                    self.send_one_message(sock, gzip.compress(time_update.SerializeToString()))
+                    send_one_message(sock, gzip.compress(time_update.SerializeToString()))
 
                 waiting_for_update = True
                 # wait for completion
                 r, __, __ = select.select([sock, ], [], [], self.config['responsiveness_timeout'])
                 if r:
                     # get response
-                    data = self.recv_one_message(sock)
+                    data = recv_one_message(sock)
                     if not data: continue
                     waiting_for_update = False
 
@@ -191,7 +147,7 @@ class NetworkCoordinator:
             self.protobuf_sync_barrier_bottom.abort()
             sock.close()
 
-    def _run_protobuf_client_net_sim(self, tuns, ip_to_tun_map):
+    def _run_protobuf_client_net_sim(self: NetworkCoordinator, tuns, ip_to_tun_map):
 
         # Connect the socket to the port where the server is listening
         if self.net_use_uds:
@@ -204,7 +160,7 @@ class NetworkCoordinator:
             sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
 
         try:
-            if self.try_connecting(sock, server_address, "Error (network simulator protobuf client):") == -1:
+            if try_connecting(sock, server_address, "Error (network simulator protobuf client):") == -1:
                 self.run_event.clear()
                 return
 
@@ -237,13 +193,13 @@ class NetworkCoordinator:
                     if self.channel_data:
                         time_update.channel_data = self.channel_data
 
-                    self.send_one_message(sock, gzip.compress(time_update.SerializeToString()))
+                    send_one_message(sock, gzip.compress(time_update.SerializeToString()))
 
                 waiting_for_update = True
                 # wait for update
                 r, __, __ = select.select([sock, ], [], [], self.config['responsiveness_timeout'])
                 if r:
-                    data = self.recv_one_message(sock)
+                    data = recv_one_message(sock)
                     if not data: continue
                     waiting_for_update = False
 
@@ -268,7 +224,7 @@ class NetworkCoordinator:
                             data = bytearray(data)
                             data[16:20] = time_update_tuple[4].to_bytes(4, byteorder="big")  # set IP
                             data[10:12] = b'\x00\x00'  # clear chksum
-                            data[10:12] = self.generate_ipv4_checksum(data[:20]).to_bytes(2, byteorder="big")
+                            data[10:12] = generate_ipv4_checksum(data[:20]).to_bytes(2, byteorder="big")
                             data[26:28] = b'\x00\x00'  # clear UDP chksum
 
                         if ber == 0:
@@ -315,25 +271,14 @@ class NetworkCoordinator:
             print('Closing protobuf client socket (network simulator)', file=sys.stderr)
             sock.close()
 
-    @staticmethod
-    def generate_ipv4_checksum(ip_header):
-        if len(ip_header) % 2 == 1:
-            ip_header += "\0"
-        checksum = sum(array.array("H", ip_header))
-        checksum = (checksum >> 16) + (checksum & 0xffff)
-        checksum += (checksum >> 16)
-        checksum = ~checksum
-        # assumes little endian
-        return (((checksum >> 8) & 0xff) | checksum << 8) & 0xffff
-
-    def _apply_ber(self, ber, data):
-        for byte_number, bit_to_flip in self._get_flip_locations(ber, len(data)):
+    def _apply_ber(self: NetworkCoordinator, ber, data):
+        for byte_number, bit_to_flip in get_flip_locations(ber, len(data)):
             if byte_number < 20:
                 return None
             data[byte_number] = data[byte_number] ^ 1 << bit_to_flip
         return data
 
-    def _transfer_driver_requests(self, phy_driver_sockets, phy_socket_to_lock, netsim_driver_socket, netsim_lock):
+    def _transfer_driver_requests(self: NetworkCoordinator, phy_driver_sockets, phy_socket_to_lock, netsim_driver_socket, netsim_lock):
         send_stuff_timer = None
         request_set_lock = threading.Lock()
         request_set = set()
@@ -344,7 +289,7 @@ class NetworkCoordinator:
                 request_set.clear()
             try:
                 with netsim_lock:
-                    self.send_one_message(netsim_driver_socket, gzip.compress(driver_requests_string))
+                    send_one_message(netsim_driver_socket, gzip.compress(driver_requests_string))
                 if self.config['print_debug']: print(f"Wrote driver request to network simulator")
             except socket.error as msg:
                 print("Error (Driver request transfer): %s" % (msg,))
@@ -355,7 +300,7 @@ class NetworkCoordinator:
                 try:
                     for readable_socket in r:
                         with phy_socket_to_lock[readable_socket]:
-                            incoming_message_string = self.recv_one_message(readable_socket)
+                            incoming_message_string = recv_one_message(readable_socket)
                         if not incoming_message_string: continue
                         if self.config['print_debug']: print(f"Read driver request")
                         incoming_message_string = incoming_message_string.decode("utf-8")
@@ -371,14 +316,14 @@ class NetworkCoordinator:
             else:
                 continue
 
-    def _transfer_driver_responses(self, phy_driver_sockets, phy_socket_locks, netsim_driver_socket, netsim_lock):
+    def _transfer_driver_responses(self: NetworkCoordinator, phy_driver_sockets, phy_socket_locks, netsim_driver_socket, netsim_lock):
         mac_to_index = {mac_i: i for i, mac_i in enumerate(self.config['mac_list'])}
         while self.run_event.is_set():
             r, __, __ = select.select([netsim_driver_socket, ], [], [], self.config['responsiveness_timeout'])
             if r:
                 try:
                     with netsim_lock:
-                        data_list = self.recv_one_message(netsim_driver_socket)
+                        data_list = recv_one_message(netsim_driver_socket)
                     if not data_list: continue
                     if self.config['print_debug']: print(f"Read driver response from network simulator")
 
@@ -388,7 +333,7 @@ class NetworkCoordinator:
                         socket_index = mac_to_index[src_mac]
                         appropriate_socket = phy_driver_sockets[socket_index]
                         with phy_socket_locks[socket_index]:
-                            self.send_one_message(appropriate_socket, json.dumps(data).encode("utf-8"))
+                            send_one_message(appropriate_socket, json.dumps(data).encode("utf-8"))
                         if self.config['print_debug']: print(f"Wrote driver response to socket {socket_index}")
 
                 except socket.error as msg:
@@ -396,7 +341,7 @@ class NetworkCoordinator:
             else:
                 continue
 
-    def _run_driver_process(self, num_interfaces):
+    def _run_driver_process(self: NetworkCoordinator, num_interfaces):
         if self.net_use_uds:
             server_address = self.config['net_driver_uds_server_address']
             netsim_driver_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -407,7 +352,7 @@ class NetworkCoordinator:
             netsim_driver_socket.setsockopt(socket.IPPROTO_TCP, socket.TCP_QUICKACK, 1)
 
         try:
-            if self.try_connecting(netsim_driver_socket, server_address, "Error (Network simulator driver client):") == -1:
+            if try_connecting(netsim_driver_socket, server_address, "Error (Network simulator driver client):") == -1:
                 return
             netsim_lock = threading.Lock()
 
@@ -417,7 +362,7 @@ class NetworkCoordinator:
             for i in range(num_interfaces):
                 phy_socket_server_address = self.config['phy_driver_uds_server_address'] + str(i)
                 phy_driver_socket = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
-                if self.try_connecting(phy_driver_socket, phy_socket_server_address, f"Error (Physics coordinator driver client {i}):") == -1:
+                if try_connecting(phy_driver_socket, phy_socket_server_address, f"Error (Physics coordinator driver client {i}):") == -1:
                     continue
                 phy_driver_sockets.append(phy_driver_socket)
                 phy_socket_lock = threading.Lock()
@@ -439,65 +384,9 @@ class NetworkCoordinator:
         read_thread.join()
         write_thread.join()
 
-    @staticmethod
-    def try_connecting(sock, address, tag):
-        i = 0
-        while i < 100:
-            try:
-                sock.connect(address)
-                break
-            except socket.error:
-                i += 1
-                time.sleep(2)
-        else:
-            print(tag + " Could not connect")
-            return -1
-        return 0
-
-
-    @staticmethod
-    def _get_flip_locations(ber, packet_length):
-        current_byte = 0
-        while current_byte < packet_length:
-            space_to_next_error_bit = np.random.geometric(p=ber)
-            space_to_next_error_byte, bit_to_flip = divmod(space_to_next_error_bit, 8)
-            current_byte = current_byte + space_to_next_error_byte
-            if current_byte < packet_length:
-                yield current_byte, bit_to_flip
-
-    @staticmethod
-    def send_one_message(sock, data):
-        length = len(data)
-        sock.sendall(struct.pack('!I', length) + data)
-
-    @classmethod
-    def recv_one_message(cls, sock):
-        lengthbuf = cls.recvall(sock, 4)
-        if not lengthbuf: return None
-        length, = struct.unpack('!I', lengthbuf)
-        return cls.recvall(sock, length)
-
-    @staticmethod
-    def recvall(sock, count):
-        buf = bytearray()
-        while count:
-            newbuf = sock.recv(count)
-            if not newbuf: return None
-            buf += newbuf
-            count -= len(newbuf)
-        return buf
-
-    def run_network_coordinator(self):
-
-        ip_list = self._setup_network()
+    def run_network_coordinator(self: NetworkCoordinator):
+        ip_list = setup_network(self.config)
         num_ips = len(ip_list)
-
-        # constants for opening TUNs
-        TUNSETIFF = 0x400454ca
-        TUNSETOWNER = TUNSETIFF + 2
-        IFF_TUN = 0x0001
-        # IFF_TAP = 0x0002
-        IFF_NO_PI = 0x1000
 
         tuns = []
         tun_threads = []
@@ -559,16 +448,16 @@ class NetworkCoordinator:
                 driver_process.join()
             print("Threads successfully closed")
         finally:
-            self._remove_network(num_ips)
+            remove_network(num_ips)
 
 
 class AtomicCounter:
-    def __init__(self, initial=0):
+    def __init__(self: AtomicCounter, initial: int = 0) -> None:
         """Initialize a new atomic counter to given initial value (default 0)."""
         self.value = initial
         self._lock = threading.Lock()
 
-    def increment(self, num=1):
+    def increment(self: AtomicCounter, num: int = 1) -> int:
         """Atomically increment the counter by num (default 1) and return the
         new value.
         """
@@ -577,12 +466,12 @@ class AtomicCounter:
         return self.value
 
 
-def main(args):
+def main(args: List[str]) -> any:
     if len(args) != 2:
-        print("usage: network_coordinator.py <config_file>")
+        print("usage: {0} <config_file>".format(args[0]))
     else:
-        network_coordinator = NetworkCoordinator(args[1])
-        network_coordinator.run_network_coordinator()
+        net_coord = NetworkCoordinator(args[1])
+        net_coord.run_network_coordinator()
     return 0
 
 

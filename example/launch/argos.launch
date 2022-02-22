@@ -1,21 +1,21 @@
 <launch>
 
   <node pkg="network_coordinator"
-        type="net_coord.py"
+        type="argos_hack_net_coord.py"
         name="network_coordinator"
         output="screen"
-        args="$(find example)/cfg/example.yaml"/>
+        args="$(find example)/cfg/argos_demo.yaml"/>
 
   <node pkg="example"
         type="net_sim_dummy.py"
         name="net_sim_dummy"
         output="screen"
-        args="$(find example)/cfg/example.yaml"/>
+        args="$(find example)/cfg/argos_demo.yaml"/>
 
   <node pkg="example"
         type="phy_sim_dummy.py"
         name="phy_sim_dummy"
         output="screen"
-        args="$(find example)/cfg/example.yaml"/>
+        args="$(find example)/cfg/argos_demo.yaml"/>
 
 </launch>
