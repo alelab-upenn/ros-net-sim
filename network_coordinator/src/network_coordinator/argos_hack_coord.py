@@ -340,7 +340,7 @@ class ArgosNetCoordinator:
 
     # Capture line of site data for every agent in simulation
     def _obtain_line_of_site_data(self: ArgosNetCoordinator) -> None:
-        while self.keep_listening:
+        while self.run_event.is_set():
             los_map = ArgosNetCoordinator.gen_empty_los_array(len(self.argos_models))
 
             for model in self.argos_models:
@@ -366,7 +366,7 @@ class ArgosNetCoordinator:
                 # Setup & teardown line of site subscriber
                 sub = rospy.Subscriber("/{0}/lineOfSight".format(model), losList, callback)
                 # Blocking to allow for a single call to callback()
-                self.los_called.wait()
+                self.los_called.wait(timeout=0.5)
                 sub.unregister()
             # Populate los
             self.los_lock.acquire()
@@ -424,8 +424,7 @@ class ArgosNetCoordinator:
             netsim_protobuf_thread = Thread(target=self._run_protobuf_client_net_sim, args=(tuns, ip_to_tun_map))
             phy_protobuf_thread.start()
             netsim_protobuf_thread.start()
-
-            self.keep_listening = True
+            # start (ARGoS specific) line-of-site subscriber thread 
             argos_los_thread = Thread(target=self._obtain_line_of_site_data)
             argos_los_thread.start()
 
@@ -452,8 +451,8 @@ class ArgosNetCoordinator:
             phy_protobuf_thread.join()
         if netsim_protobuf_thread:
             netsim_protobuf_thread.join()
+        print("wating on los threads")
         if argos_los_thread:
-            self.keep_listening = False
             argos_los_thread.join()
         print("Threads successfully closed")
         remove_network(num_ips)
